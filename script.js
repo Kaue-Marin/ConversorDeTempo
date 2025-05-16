@@ -1,16 +1,15 @@
-const TotalSeconds = parseInt(document.getElementById("tempoSegundos").value);
+function converterTempo() {
+  const segundosTotais = parseInt(document.getElementById("tempoSegundos").value);
 
-// função para formatar o tempo em segundos em formato de horas:minutos:segundos
+  if (isNaN(segundosTotais) || segundosTotais < 0) {
+    document.getElementById("resultado").innerText = "Insira um valor válido";
+    return;
+  }
 
-const formatTime = () => {
-  const data = new Date(TotalSeconds * 1000)
-
-  // pega a hora usando o padrão mundial, conevrte em string
-  // e completa com zeros caso nao tenham dois caracteres, tipo "06"
-  const hours = String(data.getUTCHours()).padStart(2, '0');
-  const minutes = String(data.getUTCMinutes()).padStart(2, '0');
-  const seconds = String(data.getUTCSeconds()).padStart(2, '0');
+  const horas = Math.floor(segundosTotais / 3600);
+  const minutos = Math.floor((segundosTotais % 3600) / 60);
+  const segundos = segundosTotais % 60;
 
   document.getElementById("resultado").innerText = 
-  `${hours}:${minutes}:${seconds}`;
+    `${horas} hora(s), ${minutos} minuto(s), ${segundos} segundo(s).`;
 }
